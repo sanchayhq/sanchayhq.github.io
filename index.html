@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanchay: open-source personal finance app and AI CFO for Mac</title>
+<meta name="description" content="Sanchay is a free, open-source personal finance app for Mac. Import bank and credit card statements, track expenses, plan savings and financial independence, and ask a private AI CFO about your money. Built for India, with a US mode.">
+<link rel="canonical" href="https://sanchayhq.github.io/">
+<meta name="theme-color" content="#121110">
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sanchay">
+<meta property="og:title" content="Sanchay: your private AI CFO, open source">
+<meta property="og:description" content="Personal finance and expense tracking on your Mac. Your statements never leave it.">
+<meta property="og:url" content="https://sanchayhq.github.io/">
+<meta property="og:image" content="https://sanchayhq.github.io/assets/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sanchay: your private AI CFO, open source">
+<meta name="twitter:description" content="Personal finance and expense tracking on your Mac. Your statements never leave it.">
+<meta name="twitter:image" content="https://sanchayhq.github.io/assets/social-preview.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Sanchay",
+  "description": "Open-source personal finance app and AI CFO for Mac. Import bank statements, track expenses, plan savings and financial independence with a private AI.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "macOS (Apple silicon)",
+  "url": "https://sanchayhq.github.io/",
+  "downloadUrl": "https://github.com/sanchayhq/sanchay/releases/latest",
+  "softwareVersion": "0.1.0",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "image": "https://sanchayhq.github.io/assets/social-preview.png",
+  "screenshot": "https://sanchayhq.github.io/assets/today.png",
+  "codeRepository": "https://github.com/sanchayhq/sanchay",
+  "author": { "@type": "Organization", "name": "Sanchay", "url": "https://github.com/sanchayhq" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is Sanchay free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Sanchay is free and open source under the AGPL-3.0 licence. There is no subscription and no account." } },
+    { "@type": "Question", "name": "Does Sanchay need my bank login?", "acceptedAnswer": { "@type": "Answer", "text": "No. You import the statements your bank already gives you, as PDF or CSV. Sanchay never asks for bank passwords." } },
+    { "@type": "Question", "name": "Where is my data stored?", "acceptedAnswer": { "@type": "Answer", "text": "In a SQLite database on your Mac. Sanchay has no server, no telemetry and no analytics. Data leaves your Mac only through features you turn on, such as a cloud AI, and personal identifiers are masked first." } },
+    { "@type": "Question", "name": "Which AI does it use?", "acceptedAnswer": { "@type": "Answer", "text": "You choose. A local model through Ollama keeps everything on your Mac. You can also use Claude, Gemini or OpenAI." } },
+    { "@type": "Question", "name": "Does it work outside India?", "acceptedAnswer": { "@type": "Answer", "text": "Sanchay is built for India first. Pick another country during setup and it switches the currency, the sample data and the advice. The US is the first country supported this way." } }
+  ]
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,600,100&display=swap');
+  :root {
+    --bg: #121110; --surface: #1c1a18; --line: #2f2b28; --ink: #f1ece6; --ink-2: #bcb3a9; --ink-3: #968d83;
+    --green: #52c7a5; --gold: #f4aa1c;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: var(--green); }
+  .glow { background: radial-gradient(1000px 600px at 15% -10%, rgba(16,185,129,.18), transparent 60%), radial-gradient(800px 500px at 100% 40%, rgba(212,160,23,.08), transparent 60%); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  header.top { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 600; }
+  .brand img { width: 32px; height: 32px; }
+  nav a { color: var(--ink-2); text-decoration: none; margin-left: 22px; font-size: 15px; }
+  nav a:hover { color: var(--ink); }
+  .hero { text-align: center; padding: 56px 0 40px; }
+  .hero img.logo { width: 96px; height: 96px; }
+  h1 { font-family: Fraunces, Georgia, serif; font-variation-settings: 'SOFT' 100; font-weight: 600; font-size: clamp(38px, 6vw, 64px); line-height: 1.06; letter-spacing: -1px; margin: 18px 0 14px; }
+  .lede { color: var(--ink-2); font-size: clamp(18px, 2.2vw, 21px); max-width: 680px; margin: 0 auto; }
+  .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600; text-decoration: none; font-size: 16px; }
+  .btn.primary { background: var(--ink); color: #121110; }
+  .btn.ghost { border: 1px solid var(--line); color: var(--ink); background: rgba(255,255,255,.03); }
+  .small { color: var(--ink-3); font-size: 14px; margin-top: 12px; }
+  .video { margin: 44px auto 0; max-width: 1000px; border-radius: 14px; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.12); background: #000; }
+  .video video { display: block; width: 100%; height: auto; }
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  h2 { font-family: Fraunces, Georgia, serif; font-variation-settings: 'SOFT' 100; font-weight: 600; font-size: clamp(28px, 4vw, 38px); letter-spacing: -.5px; margin: 0 0 10px; }
+  .intro { color: var(--ink-2); max-width: 720px; margin: 0 0 32px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--ink-2); font-size: 15.5px; }
+  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .shots figure { margin: 0; }
+  .shots img { width: 100%; border-radius: 10px; border: 1px solid var(--line); display: block; }
+  .shots figcaption { color: var(--ink-3); font-size: 14px; margin-top: 8px; text-align: center; }
+  table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--ink-3); font-weight: 500; }
+  td:first-child { white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { color: var(--ink-2); margin: 10px 0 0; }
+  footer { border-top: 1px solid var(--line); padding: 36px 0 48px; color: var(--ink-3); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  @media (max-width: 640px) { nav a.hide-sm, h1 .br { display: none; } td:first-child { white-space: normal; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="glow">
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="./"><img src="assets/icon.svg" alt="">Sanchay</a>
+      <nav>
+        <a class="hide-sm" href="#features">Features</a>
+        <a class="hide-sm" href="#privacy">Privacy</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/sanchayhq/sanchay">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <img class="logo" src="assets/icon.svg" alt="Sanchay logo: gold coins with a green sprout">
+        <h1>Your private AI CFO,<br class="br"> free and open source</h1>
+        <p class="lede">Sanchay is a personal finance app for your Mac. Import your bank and credit card statements, see where your money goes, and get a plan built from your own numbers. Nothing is uploaded unless you turn it on.</p>
+        <div class="ctas">
+          <a class="btn primary" href="https://github.com/sanchayhq/sanchay/releases/latest">Download for Mac</a>
+          <a class="btn ghost" href="https://github.com/sanchayhq/sanchay">View on GitHub</a>
+        </div>
+        <p class="small">Free · macOS on Apple silicon · Signed and notarized by Apple</p>
+        <div class="video">
+          <video src="assets/sanchay-demo.mp4" poster="assets/demo-poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="A 70-second tour of Sanchay using sample data"></video>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <h2>What it does</h2>
+    <p class="intro">An expense tracker, a budget and a financial planner in one app. It reads the statements you already get, so there is no bank login to hand over.</p>
+    <div class="grid">
+      <div class="card"><h3>Reads your statements</h3><p>PDF or CSV from banks and credit cards, including password-protected PDFs, payslips and CAS statements. It works out the columns and dates on its own and merges overlapping statements.</p></div>
+      <div class="card"><h3>Closes your month</h3><p>Income, spending, saving rate, what changed and why, recurring bills, and what you can safely spend before payday. One-off payments are kept apart from real trends.</p></div>
+      <div class="card"><h3>Ask your CFO</h3><p>Ask about your money in plain English. Answers come from your own numbers, with tables and the maths behind them.</p></div>
+      <div class="card"><h3>Finds savings</h3><p>Money leaks, subscriptions you may not need, and cheaper ways to live the same life, each sized from your real spending.</p></div>
+      <div class="card"><h3>Plans financial independence</h3><p>An estimated date when work becomes optional, and how much sooner each change gets you there.</p></div>
+      <div class="card"><h3>Connects read-only</h3><p>In India: INDmoney, Zerodha, Groww, Dhan, Upstox, FYERS and Kotak Neo through their official MCP servers. Anything that could trade or change your accounts is blocked.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>A look inside</h2>
+    <p class="intro">All screenshots use the built-in sample data.</p>
+    <div class="shots">
+      <figure><img src="assets/today.png" alt="The Today page with a note from your CFO, spending, savings and safe-to-spend" loading="lazy"><figcaption>Today</figcaption></figure>
+      <figure><img src="assets/chat.png" alt="Ask your CFO answering a question about saving with a table" loading="lazy"><figcaption>Ask your CFO</figcaption></figure>
+      <figure><img src="assets/freedom.png" alt="The Freedom page with an estimated financial-independence date" loading="lazy"><figcaption>Freedom</figcaption></figure>
+      <figure><img src="assets/categories.png" alt="Spending by category and by month" loading="lazy"><figcaption>Categories</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="wrap">
+    <h2>Private by design</h2>
+    <p class="intro">Your data lives in a database file on your Mac. Sanchay has no server, no accounts, no telemetry and no analytics. Data leaves your Mac only through features you turn on.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>You turn on</th><th>What is sent</th><th>Sent to</th></tr>
+        <tr><td>A local AI (Ollama)</td><td>Nothing. The model runs on your Mac.</td><td>Nobody</td></tr>
+        <tr><td>A cloud AI</td><td>A summary of your finances and your messages. Account and card numbers, PAN, Aadhaar, UPI IDs, emails and phone numbers are masked first.</td><td>Claude, Gemini or OpenAI, whichever you pick</td></tr>
+        <tr><td>A data source</td><td>Read-only requests with your sign-in</td><td>That service</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Questions</h2>
+    <details><summary>Is Sanchay free?</summary><p>Yes. It is free and open source under the AGPL-3.0 licence. There is no subscription and no account.</p></details>
+    <details><summary>Does it need my bank login?</summary><p>No. You import the statements your bank already gives you, as PDF or CSV. Sanchay never asks for bank passwords.</p></details>
+    <details><summary>Where is my data stored?</summary><p>In a SQLite database in your Mac's Application Support folder. API keys and sign-in tokens are encrypted with the macOS Keychain. Turn on FileVault to encrypt the rest of the disk.</p></details>
+    <details><summary>Which AI does it use?</summary><p>You choose. A local model through Ollama keeps everything on your Mac. You can also use Claude, Gemini or OpenAI, with personal identifiers masked before anything is sent.</p></details>
+    <details><summary>Does it work outside India?</summary><p>Sanchay is built for India first. Pick another country during setup and it switches the currency, the sample data and the advice. The US is the first country supported this way.</p></details>
+    <details><summary>Windows or Intel Macs?</summary><p>Not yet. Builds for Intel Macs and Windows are open issues on GitHub, and help is welcome.</p></details>
+    <details><summary>Is this financial advice?</summary><p>No. Sanchay gives budgeting and informational insights based on your data. It is not a SEBI-registered investment adviser.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Sanchay (संचय) is Hindi for "saving up". AGPL-3.0.</span>
+    <span><a href="https://github.com/sanchayhq/sanchay">GitHub</a> · <a href="https://github.com/sanchayhq/sanchay/releases/latest">Download</a> · <a href="https://github.com/sanchayhq/sanchay/blob/main/CONTRIBUTING.md">Contribute</a> · <a href="https://github.com/sanchayhq/sanchay/security/policy">Security</a></span>
+  </div>
+</footer>
+</body>
+</html>
